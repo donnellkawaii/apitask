@@ -1,0 +1,180 @@
+/* user landing page */
+#storeTable{
+  border-style: solid;
+  width: 1px;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.storeHeader{
+  border-right-style: solid;
+  border-bottom-style: solid;
+  width: 1px;
+  margin-bottom: 90%;
+  padding: 10px;
+  font-size: 23px;
+}
+
+td{
+  border-right-style: solid;
+  text-align: center;
+  margin: 55%;
+}
+
+/* loging page */
+
+.container{
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10% 30% 0%;
+  padding: 4%;
+
+}
+
+/* modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  /* border: 1px solid #888; */
+  width: 40%;
+  border-style: none;
+  border-radius: 6px;
+}
+
+/* The Close Button */
+.close, 
+.updateStoreClose{
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus,
+.updateStoreClose:hover,
+.updateStoreClose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.updateStoreClose{
+  display: flex;
+  justify-content: flex-end;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+}
+
+#addstoreModalContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+.addStore-input{
+  margin: 1% 1% 1%;
+  height: 30px;
+}
+
+.updateStore-input{
+  margin: 1% 1% 1%;
+  height: 30px;
+}
+
+#updatestoreModalContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1%;
+}
+#message{
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  /* border-style: solid; */
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#messageContaine{
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+}
+
+/* Style for the icon cell */
+.icon-cell {
+  text-align: center; /* Center the icons horizontally */
+}
+
+/* Style for the icons */
+.update-icon {
+  width: 38px;
+    height: 36px;
+    margin: 1px 10px;
+}
+
+.delete-icon {
+  width: 38px;
+    height: 36px;
+    margin: 1px 10px;
+}
+
+.update-icon:hover{
+  cursor: pointer;
+}
+
+.delete-icon:hover{
+  cursor: pointer;
+}
+
+button{
+  background: lightgreen;
+    color: white;
+    border-style: none;
+    padding: 6px;
+    width: 122px;
+    font-size: 14px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+#myBtn:hover,
+#submit-button:hover,
+#clear-button:hover,
+#update-submit-button:hover,
+#update-clear-button:hover,
+#logoutButton:hover{
+  cursor: pointer;
+}
+
+label{
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.table-container{
+  display: flex;
+  justify-content: center;
+}

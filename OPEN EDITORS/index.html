@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <script type="text/javascript" src="function.js"></script>
+   <script  type="text/javascript" src="../server.js"></script>
+   <link rel="stylesheet" href="design.css">
+   <link rel="shortcut icon" href="#">
+
+  <title>Document</title>
+</head>
+<body>
+  <div id = "button-container"> 
+    <button id="myBtn" onclick="addStoreModal()">Add Store</button>
+    <!-- <button id="logoutButton">Logout</button> -->
+  </div>
+<!-- add store modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id = "addstoreModalContainer">
+      <div id = "messageContainer">
+    <div id="message" style="display: none;" ></div>
+  </div>
+      <label>Name:*</label>
+      <input type = "text" id="addStoreName" class = "addStore-input" required>
+      <label>Location:*</label>
+      <input type = "text" id="addStoreLocation"  class = "addStore-input" required>
+      <label>Email:*</label>
+      <input type = "email" id="addStoreEmail" class = "addStore-input" required>
+      <label>Date:*</label>
+      <input type = "date" id="addStoreDate" class = "addStore-input" required>
+      <label>Password:*</label>
+      <input type = "password" id="addStorePassword" class = "addStore-input" required>
+      <div>
+        <button id="submit-button" onclick="addStore()">Submit</button>
+        <button id="clear-button" onclick="clearFields()">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- update modal -->
+<div id="updateStoreModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="updateStoreClose">&times;</span>
+    <br>
+    <div id = "updatestoreModalContainer">
+      <div id = "messageContainer">
+    <div id="update-message" style="display: none;" ></div>
+  </div>
+      <label>Name:</label>
+      <input type = "text" id="updateStoreName" class = "updateStore-input" required>
+      <!-- <label>Location</label>
+      <input type = "text" id="updateStoreLocation"  class = "updateStore-input" required> -->
+      <div>
+        <button id="update-submit-button" onclick= "updateStore()" >Submit</button>
+        <button id="update-clear-button" onclick="updateClearFields()" >Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="delete-message" style="display: none;" ></div>
+  <br>
+  <br>
+  <div class="table-container">
+ <table id="storeTable">
+   <thead>
+    <tr>
+      <th class="storeHeader">ID</th>
+      <th class="storeHeader">Name</th>
+      <th class="storeHeader">Location</th>
+      <th class="storeHeader" id = "email">Email</th>
+      <th class="storeHeader">Date</th>
+      <th class="storeHeader" >Action</th>
+    </tr>
+   </thead>
+    <tbody id = "storeData">
+      <tr>
+        <td id="test"><td>
+      </tr>
+    </tbody>
+
+ </table>
+</div>
+</body>
+</html>
+

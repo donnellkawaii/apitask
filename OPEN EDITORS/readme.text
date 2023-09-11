@@ -1,0 +1,479 @@
+Documentation for JavaScript Code
+Purpose
+This JavaScript code provides functions for interacting with a store management system. It handles operations like retrieving store data, displaying it in a table, logging in users, adding and updating store information, and deleting stores.
+
+funciton.js file
+Functions
+getStores()
+Purpose: Retrieves store data from the server.
+Returns: A promise that resolves to the retrieved data.
+Throws: An error if the request fails.
+
+getStoresByEmail()
+Purpose: Retrieves store data based on email.
+Returns: A promise that resolves to the retrieved data.
+Throws: An error if the request fails.
+
+displayStoreInfo()
+Purpose: Displays store information in an HTML table.
+Dependencies: Relies on getStores() to retrieve store data.
+Throws: An error if there is an issue with displaying the information.
+
+login()
+Purpose: Logs in a user.
+Dependencies: Requires a valid username and password from the user interface.
+Throws: An error if there is an issue with the login process.
+
+addStoreModal()
+Purpose: Handles the modal for adding a store.
+Dependencies: Assumes there is a modal with the id myModal and a button with the id myBtn.
+Throws: No errors thrown.
+
+updateStoreModal()
+Purpose: Handles the modal for updating a store.
+Dependencies: Assumes there is a modal with the id updateStoreModal, and elements with the class update-icon.
+Throws: No errors thrown.
+
+addStore()
+Purpose: Adds a store to the system.
+Dependencies: Assumes there are input fields for store information, a submit button with the id submit-button, and a message element with the id message.
+Throws: An error if there is an issue with adding the store.
+
+updateStore()
+Purpose: Updates a store's information.
+Dependencies: Assumes there is a submit button with the id update-submit-button, an input field for the store name with the id updateStoreName, and a message element with the id update-message.
+Throws: An error if there is an issue with updating the store.
+
+deleteStore()
+Purpose: Deletes a store from the system.
+Dependencies: Assumes there are delete icons with the class delete-icon for each store.
+Throws: An error if there is an issue with deleting the store.
+
+logout()
+Purpose: Logs out a user.
+Dependencies: Assumes there is a logout button with the id logoutButton.
+Throws: An error if there is an issue with the logout process.
+
+//server.js file
+Documentation for Express Server Code
+This JavaScript code sets up an Express server that provides API endpoints for managing stores. It also includes authentication using JWT tokens and token refresh functionality.
+
+Dependencies
+dotenv: Loads environment variables from a .env file.
+express: Web application framework for Node.js.
+storeRoutes: Router for store-related routes (presumably defined elsewhere).
+cors: Middleware for handling Cross-Origin Resource Sharing.
+axios: Promise-based HTTP client for the browser and Node.js.
+jsonwebtoken: Implements JSON Web Tokens for authentication.
+
+
+Code Overview
+Setting up the Server
+require('dotenv').config();
+
+const express = require('express');
+const storeRoutes = require('./src/store/routes');
+const cors = require('cors');
+const axios = require('axios');
+const jwt = require('jsonwebtoken');
+
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(express.json());
+
+// Enable CORS for specified origin
+app.use(cors({
+  origin: 'http://127.0.0.1:5500',
+}))
+
+// Default route
+app.get("/", (req, res) =>{
+  res.send("Hello World");
+})
+
+Purpose: Sets up the server, loads environment variables, imports necessary modules, and configures middleware.
+Dependencies: express, cors, axios, jsonwebtoken.
+
+API Routes
+app.use("/api/v1/stores", storeRoutes);
+Purpose: Mounts the store routes on the specified path.
+
+User Authentication
+// ...
+app.get('/posts', authenticateToken, async (req, res) => {
+  // ...
+});
+
+app.post('/login', async (req, res) => {
+  // ...
+});
+
+// ...
+
+function authenticateToken(req, res, next) {
+  // ...
+}
+
+let refreshTokens = [];
+
+function generateAccessToken(user) {
+  // ...
+}
+
+app.post('/token', (req, res) => {
+  // ...
+});
+
+app.delete('/logout', (req, res) => {
+  // ...
+});
+Purpose: Handles user authentication using JWT tokens and provides endpoints for token refresh and logout.
+
+Server Listening
+app.listen(port, () => console.log(`app listening on port ${port}`));
+Purpose: Starts the server and listens on the specified port.
+Usage
+
+Install the required dependencies.
+Create a .env file and configure environment variables.
+Define the store routes (presumably in ./src/store/routes).
+
+Start the server by running the script.
+node server.js
+Note: This code serves as a backend for a web application and expects corresponding frontend components for full functionality. Ensure that the necessary HTML, CSS, and frontend JavaScript files are in place.
+
+//controller.js file
+# Documentation for Store Management Controller
+
+This JavaScript module provides functions for managing stores. It interacts with a database using queries defined elsewhere and handles various operations such as retrieving stores, adding, updating, and removing stores.
+
+## Dependencies
+
+- `express/lib/request`: Express request object (assumed to be part of a larger application).
+- `../../db`: Database connection pool (presumed to be defined in a separate file).
+- `./queries`: Module containing SQL queries for store operations.
+- `express`: Web application framework for Node.js.
+
+## Functions
+
+### `getStores(req, res)`
+
+- **Purpose**: Retrieves a list of all stores.
+- **Parameters**:
+  - `req`: Express request object.
+  - `res`: Express response object.
+- **Behavior**:
+  - Uses the `pool.query` function to execute a query defined in `queries.getStores`.
+  - Responds with the retrieved store data in JSON format.
+- **Throws**:
+  - Throws an error if there's an issue with the database query.
+
+### `getStoreById(req, res)`
+
+- **Purpose**: Retrieves a single store by its ID.
+- **Parameters**:
+  - `req`: Express request object with a parameter `id`.
+  - `res`: Express response object.
+- **Behavior**:
+  - Parses the `id` parameter from the request.
+  - Uses the `pool.query` function to execute a query defined in `queries.getStoreById`.
+  - Responds with the retrieved store data in JSON format.
+- **Throws**:
+  - Throws an error if there's an issue with the database query.
+
+### `addStore(req, res)`
+
+- **Purpose**: Adds a new store to the database.
+- **Parameters**:
+  - `req`: Express request object with a body containing store details (`name`, `location`, `email`, `date`, `password`, `type`).
+  - `res`: Express response object.
+- **Behavior**:
+  - Checks if the provided email already exists in the database using the query defined in `queries.checkEmailExists`.
+  - If the email exists, responds with a JSON error message.
+  - If the email is unique, executes the query defined in `queries.addStore` to add the store.
+  - Responds with a success message in JSON format.
+- **Throws**:
+  - Throws an error if there's an issue with the database queries.
+
+### `removeStore(req, res)`
+
+- **Purpose**: Removes a store from the database.
+- **Parameters**:
+  - `req`: Express request object with a parameter `id`.
+  - `res`: Express response object.
+- **Behavior**:
+  - Parses the `id` parameter from the request.
+  - Uses the `pool.query` function to execute a query defined in `queries.removeStore`.
+  - Responds with a success message in JSON format if the store was removed successfully.
+- **Throws**:
+  - Throws an error if there's an issue with the database query.
+
+### `updateStore(req, res)`
+
+- **Purpose**: Updates a store's name in the database.
+- **Parameters**:
+  - `req`: Express request object with a parameter `id` and a body containing the updated store name (`name`).
+  - `res`: Express response object.
+- **Behavior**:
+  - Parses the `id` parameter and the updated `name` from the request.
+  - Uses the `pool.query` function to execute a query defined in `queries.updateStore`.
+  - Responds with a success message in JSON format if the store was updated successfully.
+- **Throws**:
+  - Throws an error if there's an issue with the database queries.
+
+### `getEmail(req, res)`
+
+- **Purpose**: Retrieves store data based on email.
+- **Parameters**:
+  - `req`: Express request object with a parameter `email`.
+  - `res`: Express response object.
+- **Behavior**:
+  - Parses the `email` parameter from the request.
+  - Uses the `pool.query` function to execute a query defined in `queries.getEmail`.
+  - Responds with the retrieved store data in JSON format.
+- **Throws**:
+  - Throws an error if there's an issue with the database query.
+
+## Exported Module
+
+```javascript
+module.exports = {
+  getStores,
+  getStoreById,
+  addStore,
+  removeStore,
+  updateStore,
+  getEmail,
+};
+```
+
+- **Purpose**: Exports the defined functions for use in other parts of the application.
+
+## Usage Example
+
+```javascript
+const storeController = require('./path/to/storeController');
+
+// Example usage of getStores function
+storeController.getStores(req, res);
+```
+
+Note: This module is expected to be used within a larger application where the `req` and `res` objects are provided by the Express framework. Additionally, the `../../db` connection pool and `./queries` module should be correctly set up.
+
+//queries.js file
+# Documentation for SQL Queries
+
+This module contains a set of SQL queries used for interacting with a database that stores information about stores. These queries cover various operations such as retrieving, adding, updating, and removing stores.
+
+## SQL Queries
+
+### `getStores`
+
+- **Purpose**: Retrieves all records from the `stores` table.
+- **Usage**:
+  ```sql
+  SELECT * FROM stores;
+  ```
+
+### `getStoreById`
+
+- **Purpose**: Retrieves a specific store by its ID.
+- **Usage**:
+  ```sql
+  SELECT * FROM stores WHERE id = $1;
+  ```
+
+### `checkEmailExists`
+
+- **Purpose**: Checks if an email address already exists in the `stores` table.
+- **Usage**:
+  ```sql
+  SELECT s FROM stores s WHERE s.email = $1;
+  ```
+
+### `addStore`
+
+- **Purpose**: Inserts a new store into the `stores` table.
+- **Usage**:
+  ```sql
+  INSERT INTO stores (name, location, email, date, password, type) VALUES ($1, $2, $3, $4, $5, $6);
+  ```
+
+### `removeStore`
+
+- **Purpose**: Deletes a store from the `stores` table based on its ID.
+- **Usage**:
+  ```sql
+  DELETE FROM stores WHERE id = $1;
+  ```
+
+### `updateStore`
+
+- **Purpose**: Updates the name of a store in the `stores` table.
+- **Usage**:
+  ```sql
+  UPDATE stores SET name = $1 WHERE id = $2;
+  ```
+
+### `getEmail`
+
+- **Purpose**: Retrieves store information based on an email address.
+- **Usage**:
+  ```sql
+  SELECT * FROM stores WHERE email = $1;
+  ```
+
+## Exported Module
+
+```javascript
+module.exports = {
+  getStores,
+  getStoreById,
+  checkEmailExists,
+  addStore,
+  removeStore,
+  updateStore,
+  getEmail,
+};
+```
+
+- **Purpose**: Exports the defined SQL queries for use in other parts of the application.
+
+## Usage Example
+
+```javascript
+const queries = require('./path/to/queries');
+
+// Example usage of getStores query
+const getStoresQuery = queries.getStores;
+```
+
+Note: These queries are expected to be used in conjunction with a database management system (e.g., PostgreSQL) and a corresponding database schema. The `$1`, `$2`, etc., placeholders are used for parameterized queries. Ensure that the actual values are properly substituted when executing these queries.
+
+# Documentation for Store Management Router
+
+This JavaScript module sets up a router for handling HTTP requests related to store management. It delegates the handling of these requests to the corresponding controller functions.
+
+## Dependencies
+
+- `express`: Web application framework for Node.js.
+- `./controller`: Module containing store management controller functions.
+
+## Router Configuration
+
+```javascript
+const { Router } = require('express');
+const controller = require('./controller');
+
+const router = Router();
+```
+
+- **Purpose**: Imports necessary modules (`Router` from Express and the controller module) and creates a router instance.
+
+## Routes
+
+### `GET /`
+
+- **Purpose**: Retrieve all stores.
+- **Controller Function**: `controller.getStores`.
+
+### `POST /`
+
+- **Purpose**: Add a new store.
+- **Controller Function**: `controller.addStore`.
+
+### `GET /:id`
+
+- **Purpose**: Retrieve a specific store by its ID.
+- **Controller Function**: `controller.getStoreById`.
+
+### `PUT /:id`
+
+- **Purpose**: Update a store's information.
+- **Controller Function**: `controller.updateStore`.
+
+### `DELETE /:id`
+
+- **Purpose**: Remove a store from the database.
+- **Controller Function**: `controller.removeStore`.
+
+### `GET /email/:email`
+
+- **Purpose**: Retrieve store information based on an email address.
+- **Controller Function**: `controller.getEmail`.
+
+## Exported Module
+
+```javascript
+module.exports = router;
+```
+
+- **Purpose**: Exports the configured router for use in other parts of the application.
+
+## Usage Example
+
+```javascript
+const storeRouter = require('./path/to/storeRouter');
+
+// Example usage of storeRouter
+app.use("/api/v1/stores", storeRouter);
+```
+
+Note: This module is intended to be used within an Express application. The routes specified here will be accessible at the corresponding endpoints relative to the base URL. Ensure that the controller functions are correctly defined and that the `app` instance is configured to use this router.
+
+//db.js file
+# Documentation for Database Connection Pool
+
+This JavaScript module establishes a connection pool to interact with a PostgreSQL database. It exports the configured pool for use in other parts of the application.
+
+## Dependencies
+
+- `pg`: PostgreSQL client library for Node.js.
+
+## Database Connection Pool Configuration
+
+```javascript
+const Pool = require("pg").Pool;
+
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "store",
+  password: "test",
+  port: 5432,
+});
+```
+
+- **Purpose**: Creates a connection pool to the PostgreSQL database.
+- **Configuration**:
+  - `user`: Username for connecting to the database.
+  - `host`: Hostname where the database is located.
+  - `database`: Name of the database.
+  - `password`: Password for the database user.
+  - `port`: Port number for the database server.
+
+## Exported Module
+
+```javascript
+module.exports = pool;
+```
+
+- **Purpose**: Exports the configured connection pool for use in other parts of the application.
+
+## Usage Example
+
+```javascript
+const pool = require('./path/to/pool');
+
+// Example usage of the pool
+pool.query('SELECT * FROM stores', (error, results) => {
+  if (error) {
+    throw error;
+  }
+  console.log(results.rows);
+});
+```
+
+Note: This module is expected to be used within a larger application where the pool is utilized to execute SQL queries. Ensure that the database credentials and connection details are accurate.

@@ -1,0 +1,31 @@
+How to Login:
+The user will used store email and password to login:
+These are the emails, you canchoose one:
+abcstore@gmail.com
+thriftshop@gmail.com
+shoemart@gmail.com
+xyzstore@gmail.com
+gigabits@gmail.com
+
+The password is 'test'.
+
+How to add store:
+1. Click Add Store button in the top left.
+2. A modal will show.
+3. Fill in all the fields.
+4. Click submit button when finish.
+5. You can clear the fields by clciking clear.
+6. You can close the modal by clicking the x button athe top right of the modal.
+
+How to upadate store;
+1. In the table, at the right side there is an action button for update.
+2. Click the update Icon.
+3. A modal will show, you can update the name of the store.
+4. Fill in  the field.
+5. Click submit button when done.
+6. You can clear the fields by clciking clear.
+7. You can close the modal by clicking the x button athe top right of the modal.
+
+How to delete Store:
+1. In the table, at the right side there is an action button for delete.
+2. Doubke click the delete icon.

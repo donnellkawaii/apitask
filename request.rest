@@ -1,0 +1,33 @@
+GET  http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsIm5hbWUiOiJhIiwibG9jYXRpb24iOiJNYW5pbGEiLCJlbWFpbCI6ImFiY3N0b3JlQGdtYWlsLmNvbSIsImRhdGUiOiIyMDEyLTA4LTA3VDE2OjAwOjAwLjAwMFoiLCJwYXNzd29yZCI6InRlc3QiLCJ0eXBlIjoiU3VwZXJ1c2VyIiwiaWF0IjoxNjk0MzUyMTgwLCJleHAiOjE2OTQzNTMwODB9.41E-bnKSxrpUHtXj4sgcVt7g6rRa0fQrbYc_aeCxdJ4
+
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username" : "abcstore@gmail.com",
+  "password" : "test"
+}
+
+###
+GET http://localhost:3000/api/v1/stores
+
+
+###
+POST http://localhost:3000/token 
+Content-Type: application/json 
+
+{
+  "token" :  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkZyYW5rcyIsImxvY2F0aW9uIjoiSWxvY29zIE5vcnRlIiwiZW1haWwiOiJmcmFua3NAZ21haWwuY29tIiwiZGF0ZSI6IjIwMDEtMDMtMDJUMTY6MDA6MDAuMDAwWiIsImlhdCI6MTY5MzkxNzMyMX0.kmuJXQ3CVtYXXbZ1zaU77O6GoUZyWj6uU9JqAgulMQ8"
+}
+
+###
+DELETE http://localhost:3000/logout 
+Content-Type: application/json
+
+{
+  "token" :  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkZyYW5rcyIsImxvY2F0aW9uIjoiSWxvY29zIE5vcnRlIiwiZW1haWwiOiJmcmFua3NAZ21haWwuY29tIiwiZGF0ZSI6IjIwMDEtMDMtMDJUMTY6MDA6MDAuMDAwWiIsImlhdCI6MTY5MzkxNzEzN30.LDmyJkiQ4T9ScX2VsHuhZ0qpcXFxAXdXtd4H3o0k8y0"
+}
