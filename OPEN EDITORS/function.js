@@ -106,7 +106,7 @@ async function login() {
       // Handle successful login here
       // alert("Login successful!");
       // console.log(data);
-      window.location = "http://127.0.0.1:5500/OPEN%20EDITORS/index.html";
+      window.location = "http://127.0.0.1:5500/OPEN%20EDITORS/table.html";
       const responseData =  response.json();
       const userId = responseData.Id;
 
